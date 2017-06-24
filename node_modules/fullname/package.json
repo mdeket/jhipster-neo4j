@@ -1,0 +1,50 @@
+{
+  "name": "fullname",
+  "version": "2.1.0",
+  "description": "Get the fullname of the current user",
+  "license": "MIT",
+  "repository": "sindresorhus/fullname",
+  "author": {
+    "name": "Sindre Sorhus",
+    "email": "sindresorhus@gmail.com",
+    "url": "sindresorhus.com"
+  },
+  "engines": {
+    "node": ">=0.10.0"
+  },
+  "scripts": {
+    "test": "xo && ava"
+  },
+  "files": [
+    "index.js"
+  ],
+  "keywords": [
+    "name",
+    "fullname",
+    "realname",
+    "full name",
+    "first name",
+    "surname",
+    "full",
+    "real",
+    "given",
+    "user",
+    "gecos",
+    "pwuid",
+    "uid"
+  ],
+  "dependencies": {
+    "npmconf": "^2.1.1",
+    "pify": "^2.2.0",
+    "pinkie-promise": "^2.0.0"
+  },
+  "devDependencies": {
+    "ava": "*",
+    "xo": "*"
+  },
+  "xo": {
+    "ignores": [
+      "test.js"
+    ]
+  }
+}

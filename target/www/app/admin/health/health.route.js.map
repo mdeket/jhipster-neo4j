@@ -1,0 +1,1 @@
+{"version":3,"sources":["../../../../../src/main/webapp/app/admin/health/health.route.ts"],"names":[],"mappings":";;AAEA,uDAA6D;AAEhD,QAAA,WAAW,GAAU;IAC9B,IAAI,EAAE,YAAY;IAClB,SAAS,EAAE,0CAAuB;IAClC,IAAI,EAAE;QACF,SAAS,EAAE,cAAc;KAC5B;CACJ,CAAC","file":"health.route.js","sourceRoot":""}

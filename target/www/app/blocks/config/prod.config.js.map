@@ -1,0 +1,1 @@
+{"version":3,"sources":["../../../../../src/main/webapp/app/blocks/config/prod.config.ts"],"names":[],"mappings":";;AAAA,sCAA+C;AAC/C,qDAAyD;AAEzD;IACI,4DAA4D;IAC5D,EAAE,CAAC,CAAC,CAAC,kCAAkB,CAAC,CAAC,CAAC;QACtB,qBAAc,EAAE,CAAC;IACrB,CAAC;AACL,CAAC;AALD,gCAKC","file":"prod.config.js","sourceRoot":""}

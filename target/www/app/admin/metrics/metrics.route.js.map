@@ -1,0 +1,1 @@
+{"version":3,"sources":["../../../../../src/main/webapp/app/admin/metrics/metrics.route.ts"],"names":[],"mappings":";;AAEA,yDAAoE;AAEvD,QAAA,YAAY,GAAU;IAC/B,IAAI,EAAE,aAAa;IACnB,SAAS,EAAE,iDAA6B;IACxC,IAAI,EAAE;QACF,SAAS,EAAE,eAAe;KAC7B;CACJ,CAAC","file":"metrics.route.js","sourceRoot":""}

@@ -1,0 +1,1 @@
+{"version":3,"sources":["../../../../../src/main/webapp/app/account/activate/activate.route.ts"],"names":[],"mappings":";;AAEA,uCAAsD;AACtD,2DAAyD;AAE5C,QAAA,aAAa,GAAU;IAChC,IAAI,EAAE,UAAU;IAChB,SAAS,EAAE,sCAAiB;IAC5B,IAAI,EAAE;QACF,WAAW,EAAE,EAAE;QACf,SAAS,EAAE,gBAAgB;KAC9B;IACD,WAAW,EAAE,CAAC,+BAAsB,CAAC;CACxC,CAAC","file":"activate.route.js","sourceRoot":""}

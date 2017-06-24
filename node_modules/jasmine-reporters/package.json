@@ -1,0 +1,28 @@
+{
+  "author": "Larry Myers",
+  "name": "jasmine-reporters",
+  "description": "Reporters for the Jasmine BDD Framework",
+  "version": "2.2.1",
+  "homepage": "https://github.com/larrymyers/jasmine-reporters",
+  "maintainers": "Ben Loveridge <bloveridge@gmail.com>",
+  "scripts": {
+    "test": "jasmine"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/larrymyers/jasmine-reporters.git"
+  },
+  "dependencies": {
+    "mkdirp": "^0.5.1",
+    "xmldom": "^0.1.22"
+  },
+  "devDependencies": {
+    "jasmine": "^2.4.1"
+  },
+  "licenses": [
+    {
+      "type": "MIT",
+      "url": "https://raw.github.com/larrymyers/jasmine-reporters/master/LICENSE"
+    }
+  ]
+}
