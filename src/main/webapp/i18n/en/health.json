@@ -13,7 +13,6 @@
         "indicator": {
             "diskSpace": "Disk space",
             "mail": "Email",
-            "mongo": "MongoDB"
         },
         "table": {
             "service": "Service name",

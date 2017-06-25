@@ -3,15 +3,17 @@ package com.mycompany.myapp.repository;
 import com.mycompany.myapp.domain.PersistentAuditEvent;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
-import org.springframework.data.mongodb.repository.MongoRepository;
+import org.springframework.data.neo4j.repository.GraphRepository;
+import org.springframework.stereotype.Repository;
 
 import java.time.Instant;
 import java.util.List;
 
 /**
- * Spring Data MongoDB repository for the PersistentAuditEvent entity.
+ * Spring Data Neo4j repository for the PersistentAuditEvent entity.
  */
-public interface PersistenceAuditEventRepository extends MongoRepository<PersistentAuditEvent, String> {
+@Repository
+public interface PersistenceAuditEventRepository extends GraphRepository<PersistentAuditEvent> {
 
     List<PersistentAuditEvent> findByPrincipal(String principal);
 

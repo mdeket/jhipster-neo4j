@@ -1,14 +1,17 @@
 package com.mycompany.myapp.domain;
 
+import org.neo4j.ogm.annotation.GraphId;
 import org.neo4j.ogm.annotation.NodeEntity;
+import org.neo4j.ogm.annotation.Property;
+import org.neo4j.ogm.annotation.Relationship;
 import org.springframework.data.annotation.Id;
-import org.springframework.data.mongodb.core.mapping.Document;
-import org.springframework.data.mongodb.core.mapping.Field;
 import javax.validation.constraints.NotNull;
 import java.io.Serializable;
 import java.time.Instant;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.Map;
+import java.util.Set;
 
 /**
  * Persist AuditEvent managed by the Spring Boot actuator
@@ -16,28 +19,24 @@ import java.util.Map;
  */
 @NodeEntity(label = "jhi_persistent_audit_event")
 //@Document(collection = "jhi_persistent_audit_event")
-public class PersistentAuditEvent implements Serializable {
-
-    @Id
-    @Field("event_id")
-    private String id;
+public class PersistentAuditEvent extends AbstractEntity {
+//
+//    @GraphId
+//    @Property(name = "event_id")
+//    private String id;
 
     @NotNull
     private String principal;
 
-    private Instant auditEventDate;
-    @Field("event_type")
+    private Long auditEventDate;
+
+    @Property(name = "event_type")
     private String auditEventType;
 
-    private Map<String, String> data = new HashMap<>();
+    @Relationship
+    private Set<PersistentAuditEventData> data = new HashSet<>();
 
-    public String getId() {
-        return id;
-    }
-
-    public void setId(String id) {
-        this.id = id;
-    }
+//    private Map<String, String> data = new HashMap<>();
 
     public String getPrincipal() {
         return principal;
@@ -48,11 +47,13 @@ public class PersistentAuditEvent implements Serializable {
     }
 
     public Instant getAuditEventDate() {
-        return auditEventDate;
+
+        return Instant.ofEpochMilli(auditEventDate);
     }
 
     public void setAuditEventDate(Instant auditEventDate) {
-        this.auditEventDate = auditEventDate;
+
+        this.auditEventDate = auditEventDate.toEpochMilli();
     }
 
     public String getAuditEventType() {
@@ -63,11 +64,11 @@ public class PersistentAuditEvent implements Serializable {
         this.auditEventType = auditEventType;
     }
 
-    public Map<String, String> getData() {
+    public Set<PersistentAuditEventData> getData() {
         return data;
     }
 
-    public void setData(Map<String, String> data) {
+    public void setData(Set<PersistentAuditEventData> data) {
         this.data = data;
     }
 }

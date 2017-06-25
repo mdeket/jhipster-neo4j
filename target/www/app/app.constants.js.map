@@ -1,1 +1,0 @@
-{"version":3,"sources":["../../../src/main/webapp/app/app.constants.ts"],"names":[],"mappings":";;AAAA,6FAA6F;AAC5F,oBAAoB;AACrB,IAAI,QAAQ,GAAG,gBAAgB,CAAC,CAAC,4CAA4C;AAC7E,IAAI,mBAAmB,GAAG,IAAI,CAAC,CAAC,4CAA4C;AAC5E,wBAAwB;AACxB,mCAAmC;AACnC,mBAAmB;AACN,QAAA,OAAO,GAAG,QAAQ,CAAC;AACnB,QAAA,kBAAkB,GAAG,mBAAmB,CAAC","file":"app.constants.js","sourceRoot":""}

@@ -64,9 +64,9 @@ public class AccountResource {
         if (!checkPasswordLength(managedUserVM.getPassword())) {
             return new ResponseEntity<>("Incorrect password", HttpStatus.BAD_REQUEST);
         }
-        return userRepository.findOneByLogin(managedUserVM.getLogin().toLowerCase())
+        return Optional.ofNullable(userRepository.findOneByLogin(managedUserVM.getLogin().toLowerCase()))
             .map(user -> new ResponseEntity<>("login already in use", textPlainHeaders, HttpStatus.BAD_REQUEST))
-            .orElseGet(() -> userRepository.findOneByEmail(managedUserVM.getEmail())
+            .orElseGet(() -> Optional.ofNullable(userRepository.findOneByEmail(managedUserVM.getEmail()))
                 .map(user -> new ResponseEntity<>("email address already in use", textPlainHeaders, HttpStatus.BAD_REQUEST))
                 .orElseGet(() -> {
                     User user = userService
@@ -131,12 +131,12 @@ public class AccountResource {
     @Timed
     public ResponseEntity saveAccount(@Valid @RequestBody UserDTO userDTO) {
         final String userLogin = SecurityUtils.getCurrentUserLogin();
-        Optional<User> existingUser = userRepository.findOneByEmail(userDTO.getEmail());
+        Optional<User> existingUser = Optional.ofNullable(userRepository.findOneByEmail(userDTO.getEmail()));
         if (existingUser.isPresent() && (!existingUser.get().getLogin().equalsIgnoreCase(userLogin))) {
             return ResponseEntity.badRequest().headers(HeaderUtil.createFailureAlert("user-management", "emailexists", "Email already in use")).body(null);
         }
-        return userRepository
-            .findOneByLogin(userLogin)
+        return Optional.ofNullable(userRepository
+            .findOneByLogin(userLogin))
             .map(u -> {
                 userService.updateUser(userDTO.getFirstName(), userDTO.getLastName(), userDTO.getEmail(),
                     userDTO.getLangKey(), userDTO.getImageUrl());

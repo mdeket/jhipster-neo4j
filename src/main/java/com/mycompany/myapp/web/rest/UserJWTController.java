@@ -16,6 +16,8 @@ import org.springframework.security.authentication.UsernamePasswordAuthenticatio
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.transaction.annotation.Propagation;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletResponse;
@@ -42,6 +44,7 @@ public class UserJWTController {
 
     @PostMapping("/authenticate")
     @Timed
+    @Transactional(propagation = Propagation.REQUIRED)
     public ResponseEntity authorize(@Valid @RequestBody LoginVM loginVM, HttpServletResponse response) {
 
         UsernamePasswordAuthenticationToken authenticationToken =

@@ -21,11 +21,11 @@ spring:
         serialization.write_dates_as_timestamps: false
     cache:
         type: none
-    data:
-        mongodb:
-            host: localhost
-            port: 27117
-            database: neojhipster
+#    data:
+#        neo4j:
+#            uri: http://localhost:7474
+#            username: neo4j
+#            password: root
     mail:
         host: localhost
     messages:
@@ -36,8 +36,8 @@ spring:
     thymeleaf:
         mode: XHTML
 
-liquibase:
-    contexts: test
+#liquibase:
+#    contexts: test
 
 security:
     basic:

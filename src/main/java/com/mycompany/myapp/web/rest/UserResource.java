@@ -3,6 +3,7 @@ package com.mycompany.myapp.web.rest;
 import com.mycompany.myapp.config.Constants;
 import com.codahale.metrics.annotation.Timed;
 import com.mycompany.myapp.domain.User;
+import com.mycompany.myapp.repository.AuthorityRepository;
 import com.mycompany.myapp.repository.UserRepository;
 import com.mycompany.myapp.security.AuthoritiesConstants;
 import com.mycompany.myapp.service.MailService;
@@ -67,6 +68,8 @@ public class UserResource {
 
     private final UserService userService;
 
+    private AuthorityRepository authorityRepository;
+
     public UserResource(UserRepository userRepository, MailService mailService,
             UserService userService) {
 
@@ -98,11 +101,11 @@ public class UserResource {
                 .headers(HeaderUtil.createFailureAlert(ENTITY_NAME, "idexists", "A new user cannot already have an ID"))
                 .body(null);
         // Lowercase the user login before comparing with database
-        } else if (userRepository.findOneByLogin(managedUserVM.getLogin().toLowerCase()).isPresent()) {
+        } else if (Optional.ofNullable(userRepository.findOneByLogin(managedUserVM.getLogin().toLowerCase())).isPresent()) {
             return ResponseEntity.badRequest()
                 .headers(HeaderUtil.createFailureAlert(ENTITY_NAME, "userexists", "Login already in use"))
                 .body(null);
-        } else if (userRepository.findOneByEmail(managedUserVM.getEmail()).isPresent()) {
+        } else if (Optional.ofNullable(userRepository.findOneByEmail(managedUserVM.getEmail())).isPresent()) {
             return ResponseEntity.badRequest()
                 .headers(HeaderUtil.createFailureAlert(ENTITY_NAME, "emailexists", "Email already in use"))
                 .body(null);
@@ -128,11 +131,11 @@ public class UserResource {
     @Secured(AuthoritiesConstants.ADMIN)
     public ResponseEntity<UserDTO> updateUser(@Valid @RequestBody ManagedUserVM managedUserVM) {
         log.debug("REST request to update User : {}", managedUserVM);
-        Optional<User> existingUser = userRepository.findOneByEmail(managedUserVM.getEmail());
+        Optional<User> existingUser = Optional.ofNullable(userRepository.findOneByEmail(managedUserVM.getEmail()));
         if (existingUser.isPresent() && (!existingUser.get().getId().equals(managedUserVM.getId()))) {
             return ResponseEntity.badRequest().headers(HeaderUtil.createFailureAlert(ENTITY_NAME, "emailexists", "Email already in use")).body(null);
         }
-        existingUser = userRepository.findOneByLogin(managedUserVM.getLogin().toLowerCase());
+        existingUser = Optional.ofNullable(userRepository.findOneByLogin(managedUserVM.getLogin().toLowerCase()));
         if (existingUser.isPresent() && (!existingUser.get().getId().equals(managedUserVM.getId()))) {
             return ResponseEntity.badRequest().headers(HeaderUtil.createFailureAlert(ENTITY_NAME, "userexists", "Login already in use")).body(null);
         }
@@ -153,7 +156,7 @@ public class UserResource {
     public ResponseEntity<List<UserDTO>> getAllUsers(@ApiParam Pageable pageable) {
         final Page<UserDTO> page = userService.getAllManagedUsers(pageable);
         HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(page, "/api/users");
-        return new ResponseEntity<>(page.getContent(), headers, HttpStatus.OK);
+        return new ResponseEntity(page.getContent(), headers, HttpStatus.OK);
     }
 
     /**

@@ -10,6 +10,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.actuate.autoconfigure.*;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
+import org.springframework.boot.autoconfigure.domain.EntityScan;
 import org.springframework.boot.autoconfigure.liquibase.LiquibaseProperties;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.annotation.ComponentScan;
@@ -24,6 +25,7 @@ import java.util.Collection;
 @ComponentScan
 @EnableAutoConfiguration(exclude = {MetricFilterAutoConfiguration.class, MetricRepositoryAutoConfiguration.class})
 @EnableConfigurationProperties({ApplicationProperties.class})
+@EntityScan({"com.mycompany.myapp.domain", "BOOT-INF.classes.com.mycompany.myapp.domain"})
 public class NeojhipsterApp {
 
     private static final Logger log = LoggerFactory.getLogger(NeojhipsterApp.class);

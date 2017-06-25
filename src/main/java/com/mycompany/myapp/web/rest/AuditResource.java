@@ -72,7 +72,7 @@ public class AuditResource {
      * @return the ResponseEntity with status 200 (OK) and the AuditEvent in body, or status 404 (Not Found)
      */
     @GetMapping("/{id:.+}")
-    public ResponseEntity<AuditEvent> get(@PathVariable String id) {
+    public ResponseEntity<AuditEvent> get(@PathVariable Long id) {
         return ResponseUtil.wrapOrNotFound(auditEventService.find(id));
     }
 }

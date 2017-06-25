@@ -2,6 +2,7 @@ package com.mycompany.myapp.config.audit;
 
 import com.mycompany.myapp.domain.PersistentAuditEvent;
 
+import com.mycompany.myapp.domain.PersistentAuditEventData;
 import org.springframework.boot.actuate.audit.AuditEvent;
 import org.springframework.security.web.authentication.WebAuthenticationDetails;
 import org.springframework.stereotype.Component;
@@ -35,8 +36,9 @@ public class AuditEventConverter {
      * @return the converted list.
      */
     public AuditEvent convertToAuditEvent(PersistentAuditEvent persistentAuditEvent) {
+
         return new AuditEvent(Date.from(persistentAuditEvent.getAuditEventDate()), persistentAuditEvent.getPrincipal(),
-            persistentAuditEvent.getAuditEventType(), convertDataToObjects(persistentAuditEvent.getData()));
+            persistentAuditEvent.getAuditEventType(), convertDataToObjects(convertSetAuditsToMapString(persistentAuditEvent)));
     }
 
     /**
@@ -85,4 +87,43 @@ public class AuditEventConverter {
 
         return results;
     }
+
+    public Map<String, String> convertSetAuditsToMapString(PersistentAuditEvent persistentAuditEvent){
+        Map<String, String> persistentAuditEvents = new HashMap<>();
+        persistentAuditEvent.getData().stream().forEach(data -> {
+            persistentAuditEvents.put(data.getName(), data.getValue());
+        });
+        return persistentAuditEvents;
+    }
+
+    public Map<String, Object> convertSetAuditsToMapObject(PersistentAuditEvent persistentAuditEvent){
+        Map<String, Object> persistentAuditEvents = new HashMap<>();
+        persistentAuditEvent.getData().stream().forEach(data -> {
+            persistentAuditEvents.put(data.getName(), (Object)data.getValue());
+        });
+        return persistentAuditEvents;
+    }
+
+    public Set<PersistentAuditEventData> convertMapObjectToSetAuditsEventData(Map<String, Object> audits) {
+        Set<PersistentAuditEventData> events = new HashSet<>();
+        audits.forEach((key, value) -> {
+            PersistentAuditEventData event = new PersistentAuditEventData();
+            event.setName(key);
+            event.setValue(value.toString());
+            events.add(event);
+        });
+        return events;
+    }
+
+    public Set<PersistentAuditEventData> convertMapStringToSetAuditsEventData(Map<String, String> audits) {
+        Set<PersistentAuditEventData> events = new HashSet<>();
+        audits.forEach((key, value) -> {
+            PersistentAuditEventData event = new PersistentAuditEventData();
+            event.setName(key);
+            event.setValue(value);
+            events.add(event);
+        });
+        return events;
+    }
+
 }

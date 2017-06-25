@@ -25,9 +25,10 @@ spring:
     jackson:
         serialization.indent_output: true
     data:
-        mongodb:
-            uri: mongodb://localhost:27017
-            database: neojhipster
+        neo4j:
+            uri: http://localhost:7474
+            username: neo4j
+            password: root
     mail:
         host: localhost
         port: 25

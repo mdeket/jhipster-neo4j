@@ -2,9 +2,15 @@ package com.mycompany.myapp.web.rest;
 
 import com.mycompany.myapp.NeojhipsterApp;
 import com.mycompany.myapp.config.audit.AuditEventConverter;
+import com.mycompany.myapp.domain.Authority;
 import com.mycompany.myapp.domain.PersistentAuditEvent;
+import com.mycompany.myapp.domain.User;
+import com.mycompany.myapp.repository.AuthorityRepository;
 import com.mycompany.myapp.repository.PersistenceAuditEventRepository;
+import com.mycompany.myapp.repository.UserRepository;
+import com.mycompany.myapp.security.AuthoritiesConstants;
 import com.mycompany.myapp.service.AuditEventService;
+import com.mycompany.myapp.service.UserService;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -20,7 +26,10 @@ import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 
 import java.time.Instant;
+import java.time.ZonedDateTime;
 import java.time.format.DateTimeFormatter;
+import java.util.HashSet;
+import java.util.Set;
 
 import static org.hamcrest.Matchers.hasItem;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
@@ -45,6 +54,15 @@ public class AuditResourceIntTest {
 
     @Autowired
     private AuditEventConverter auditEventConverter;
+
+    @Autowired
+    private UserRepository userRepository;
+
+    @Autowired
+    private AuthorityRepository authorityRepository;
+
+    @Autowired
+    private UserService userService;
 
     @Autowired
     private MappingJackson2HttpMessageConverter jacksonMessageConverter;

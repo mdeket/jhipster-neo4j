@@ -9,6 +9,7 @@
 /Users/milandeket/work/upwork/neojhipster/src/test/java/com/mycompany/myapp/security/jwt/TokenProviderTest.java
 /Users/milandeket/work/upwork/neojhipster/src/test/java/com/mycompany/myapp/web/rest/TestUtil.java
 /Users/milandeket/work/upwork/neojhipster/src/test/java/com/mycompany/myapp/repository/CustomAuditEventRepositoryIntTest.java
+/Users/milandeket/work/upwork/neojhipster/src/test/java/com/mycompany/myapp/PersistenceContext.java
 /Users/milandeket/work/upwork/neojhipster/src/test/java/com/mycompany/myapp/web/rest/LogsResourceIntTest.java
 /Users/milandeket/work/upwork/neojhipster/src/test/java/com/mycompany/myapp/web/rest/ProfileInfoResourceIntTest.java
 /Users/milandeket/work/upwork/neojhipster/src/test/java/com/mycompany/myapp/security/SecurityUtilsUnitTest.java

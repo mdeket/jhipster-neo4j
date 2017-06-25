@@ -18,7 +18,7 @@ import java.util.stream.Collectors;
  */
 public class UserDTO {
 
-    private String id;
+    private Long id;
 
     @NotBlank
     @Pattern(regexp = Constants.LOGIN_REGEX)
@@ -65,7 +65,7 @@ public class UserDTO {
                 .collect(Collectors.toSet()));
     }
 
-    public UserDTO(String id, String login, String firstName, String lastName,
+    public UserDTO(Long id, String login, String firstName, String lastName,
         String email, boolean activated, String imageUrl, String langKey,
         String createdBy, Instant createdDate, String lastModifiedBy, Instant lastModifiedDate,
         Set<String> authorities) {
@@ -85,11 +85,11 @@ public class UserDTO {
         this.authorities = authorities;
     }
 
-    public String getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(String id) {
+    public void setId(Long id) {
         this.id = id;
     }
 

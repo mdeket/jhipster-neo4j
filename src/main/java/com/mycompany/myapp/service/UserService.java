@@ -45,7 +45,7 @@ public class UserService {
 
     public Optional<User> activateRegistration(String key) {
         log.debug("Activating user for activation key {}", key);
-        return userRepository.findOneByActivationKey(key)
+        return Optional.ofNullable(userRepository.findOneByActivationKey(key))
             .map(user -> {
                 // activate given user for the registration key.
                 user.setActivated(true);
@@ -59,7 +59,7 @@ public class UserService {
     public Optional<User> completePasswordReset(String newPassword, String key) {
        log.debug("Reset user password for reset key {}", key);
 
-       return userRepository.findOneByResetKey(key)
+       return Optional.ofNullable(userRepository.findOneByResetKey(key))
            .filter(user -> user.getResetDate().isAfter(Instant.now().minusSeconds(86400)))
            .map(user -> {
                 user.setPassword(passwordEncoder.encode(newPassword));
@@ -71,7 +71,7 @@ public class UserService {
     }
 
     public Optional<User> requestPasswordReset(String mail) {
-        return userRepository.findOneByEmail(mail)
+        return Optional.ofNullable(userRepository.findOneByEmail(mail))
             .filter(User::getActivated)
             .map(user -> {
                 user.setResetKey(RandomUtil.generateResetKey());
@@ -85,7 +85,7 @@ public class UserService {
         String imageUrl, String langKey) {
 
         User newUser = new User();
-        Authority authority = authorityRepository.findOne(AuthoritiesConstants.USER);
+        Authority authority = authorityRepository.findByName(AuthoritiesConstants.USER);
         Set<Authority> authorities = new HashSet<>();
         String encryptedPassword = passwordEncoder.encode(password);
         newUser.setLogin(login);
@@ -122,7 +122,7 @@ public class UserService {
         if (userDTO.getAuthorities() != null) {
             Set<Authority> authorities = new HashSet<>();
             userDTO.getAuthorities().forEach(
-                authority -> authorities.add(authorityRepository.findOne(authority))
+                authority -> authorities.add(authorityRepository.findByName(authority))
             );
             user.setAuthorities(authorities);
         }
@@ -146,7 +146,7 @@ public class UserService {
      * @param imageUrl image URL of user
      */
     public void updateUser(String firstName, String lastName, String email, String langKey, String imageUrl) {
-        userRepository.findOneByLogin(SecurityUtils.getCurrentUserLogin()).ifPresent(user -> {
+        Optional.ofNullable(userRepository.findOneByLogin(SecurityUtils.getCurrentUserLogin())).ifPresent(user -> {
             user.setFirstName(firstName);
             user.setLastName(lastName);
             user.setEmail(email);
@@ -177,7 +177,7 @@ public class UserService {
                 Set<Authority> managedAuthorities = user.getAuthorities();
                 managedAuthorities.clear();
                 userDTO.getAuthorities().stream()
-                    .map(authorityRepository::findOne)
+                    .map(authorityRepository::findByName)
                     .forEach(managedAuthorities::add);
                 userRepository.save(user);
                 log.debug("Changed Information for User: {}", user);
@@ -187,14 +187,14 @@ public class UserService {
     }
 
     public void deleteUser(String login) {
-        userRepository.findOneByLogin(login).ifPresent(user -> {
+        Optional.ofNullable(userRepository.findOneByLogin(login)).ifPresent(user -> {
             userRepository.delete(user);
             log.debug("Deleted User: {}", user);
         });
     }
 
     public void changePassword(String password) {
-        userRepository.findOneByLogin(SecurityUtils.getCurrentUserLogin()).ifPresent(user -> {
+        Optional.ofNullable(userRepository.findOneByLogin(SecurityUtils.getCurrentUserLogin())).ifPresent(user -> {
             String encryptedPassword = passwordEncoder.encode(password);
             user.setPassword(encryptedPassword);
             userRepository.save(user);
@@ -203,19 +203,20 @@ public class UserService {
     }
 
     public Page<UserDTO> getAllManagedUsers(Pageable pageable) {
+//        return userRepository.findAll(pageable).map(UserDTO::new);
         return userRepository.findAllByLoginNot(pageable, Constants.ANONYMOUS_USER).map(UserDTO::new);
     }
 
     public Optional<User> getUserWithAuthoritiesByLogin(String login) {
-        return userRepository.findOneByLogin(login);
+        return Optional.ofNullable(userRepository.findOneByLogin(login));
     }
 
-    public User getUserWithAuthorities(String id) {
+    public User getUserWithAuthorities(Long id) {
         return userRepository.findOne(id);
     }
 
     public User getUserWithAuthorities() {
-        return userRepository.findOneByLogin(SecurityUtils.getCurrentUserLogin()).orElse(null);
+        return Optional.ofNullable(userRepository.findOneByLogin(SecurityUtils.getCurrentUserLogin())).orElse(null);
     }
 
 
@@ -238,6 +239,10 @@ public class UserService {
      * @return a list of all the authorities
      */
     public List<String> getAuthorities() {
-        return authorityRepository.findAll().stream().map(Authority::getName).collect(Collectors.toList());
+        List<Authority> list = new ArrayList();
+        authorityRepository.findAll().forEach(authority -> {
+            list.add(authority);
+        });
+        return list.stream().map(Authority::getName).collect(Collectors.toList());
     }
 }

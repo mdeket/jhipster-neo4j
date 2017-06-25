@@ -4,8 +4,9 @@ import com.mycompany.myapp.config.Constants;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.hibernate.validator.constraints.Email;
-import org.neo4j.ogm.annotation.Index;
+import org.neo4j.ogm.annotation.GraphId;
 import org.neo4j.ogm.annotation.NodeEntity;
+import org.neo4j.ogm.annotation.Relationship;
 import org.springframework.data.annotation.Id;
 //import org.springframework.data.mongodb.core.index.Indexed;
 //import org.springframework.data.mongodb.core.mapping.Document;
@@ -25,14 +26,17 @@ import java.time.Instant;
  */
 @NodeEntity(label = "jhi_user")
 //@Document(collection = "jhi_user")
-public class User extends AbstractAuditingEntity implements Serializable {
+public class User extends AbstractAuditingEntity {
+
+    @GraphId
+    private Long id;
 
     private static final long serialVersionUID = 1L;
 
     @NotNull
     @Pattern(regexp = Constants.LOGIN_REGEX)
     @Size(min = 1, max = 50)
-    @Index
+    // TODO: add index
     private String login;
 
     @JsonIgnore
@@ -48,7 +52,8 @@ public class User extends AbstractAuditingEntity implements Serializable {
 
     @Email
     @Size(min = 5, max = 100)
-    @Index
+    // TODO:
+//    @Index
     private String email;
 
     private boolean activated = false;
@@ -68,10 +73,19 @@ public class User extends AbstractAuditingEntity implements Serializable {
     private String resetKey;
 
 
-    private Instant resetDate = null;
+    private Long resetDate = null;
 
     @JsonIgnore
+    @Relationship(type = "AUTHORITIES", direction = Relationship.INCOMING)
     private Set<Authority> authorities = new HashSet<>();
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
 
     public String getLogin() {
         return login;
@@ -147,11 +161,11 @@ public class User extends AbstractAuditingEntity implements Serializable {
     }
 
     public Instant getResetDate() {
-       return resetDate;
+       return Instant.ofEpochMilli(resetDate);
     }
 
     public void setResetDate(Instant resetDate) {
-       this.resetDate = resetDate;
+        this.resetDate = resetDate.toEpochMilli();
     }
     public String getLangKey() {
         return langKey;

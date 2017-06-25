@@ -19,10 +19,10 @@ spring:
             enabled: false
         livereload:
             enabled: false
-    data:
-        mongodb:
-            uri: bolt://127.0.0.1:7687
-            database: neojhipster
+    neo4j:
+        uri: http://localhost:7474
+        username: neo4j
+        password: root
     mail:
         host: localhost
         port: 25

@@ -1,7 +1,9 @@
 package com.mycompany.myapp.domain;
 
 
+import org.neo4j.ogm.annotation.GraphId;
 import org.neo4j.ogm.annotation.NodeEntity;
+import org.neo4j.ogm.annotation.Relationship;
 import org.springframework.data.annotation.Id;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
@@ -11,13 +13,12 @@ import java.io.Serializable;
  * An authority (a security role) used by Spring Security.
  */
 @NodeEntity(label = "jhi_authority")
-public class Authority implements Serializable {
+public class Authority extends AbstractEntity {
 
     private static final long serialVersionUID = 1L;
 
     @NotNull
     @Size(min = 0, max = 50)
-    @Id
     private String name;
 
     public String getName() {
@@ -26,6 +27,17 @@ public class Authority implements Serializable {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    @Relationship(type = "HAS_ROLE", direction = Relationship.OUTGOING)
+    private User user;
+
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
     }
 
     @Override

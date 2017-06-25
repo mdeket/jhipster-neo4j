@@ -57,7 +57,7 @@ public class UserMapper {
             .collect(Collectors.toList());
     }
 
-    public User userFromId(String id) {
+    public User userFromId(Long id) {
         if (id == null) {
             return null;
         }

@@ -1,5 +1,6 @@
 package com.mycompany.myapp.web.rest;
 
+import com.google.common.collect.Lists;
 import com.mycompany.myapp.NeojhipsterApp;
 import com.mycompany.myapp.domain.Authority;
 import com.mycompany.myapp.domain.User;
@@ -16,11 +17,13 @@ import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.MockitoAnnotations;
+import org.neo4j.graphdb.GraphDatabaseService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.data.web.PageableHandlerMethodArgumentResolver;
 import org.springframework.http.MediaType;
 import org.springframework.http.converter.json.MappingJackson2HttpMessageConverter;
+import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
@@ -47,9 +50,10 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
  */
 @RunWith(SpringRunner.class)
 @SpringBootTest(classes = NeojhipsterApp.class)
+@ContextConfiguration
 public class UserResourceIntTest {
 
-    private static final String DEFAULT_ID = "id1";
+    private static final Long DEFAULT_ID = 1l;
 
     private static final String DEFAULT_LOGIN = "johndoe";
     private static final String UPDATED_LOGIN = "jhipster";
@@ -135,7 +139,7 @@ public class UserResourceIntTest {
 
     @Test
     public void createUser() throws Exception {
-        int databaseSizeBeforeCreate = userRepository.findAll().size();
+        int databaseSizeBeforeCreate = Lists.newArrayList(userRepository.findAll()).size();
 
         // Create the User
         Set<String> authorities = new HashSet<>();
@@ -162,7 +166,7 @@ public class UserResourceIntTest {
             .andExpect(status().isCreated());
 
         // Validate the User in the database
-        List<User> userList = userRepository.findAll();
+        List<User> userList = Lists.newArrayList(userRepository.findAll());
         assertThat(userList).hasSize(databaseSizeBeforeCreate + 1);
         User testUser = userList.get(userList.size() - 1);
         assertThat(testUser.getLogin()).isEqualTo(DEFAULT_LOGIN);
@@ -175,12 +179,12 @@ public class UserResourceIntTest {
 
     @Test
     public void createUserWithExistingId() throws Exception {
-        int databaseSizeBeforeCreate = userRepository.findAll().size();
+        int databaseSizeBeforeCreate = Lists.newArrayList(userRepository.findAll()).size();
 
         Set<String> authorities = new HashSet<>();
         authorities.add("ROLE_USER");
         ManagedUserVM managedUserVM = new ManagedUserVM(
-            "1L",
+            1l,
             DEFAULT_LOGIN,
             DEFAULT_PASSWORD,
             DEFAULT_FIRSTNAME,
@@ -202,15 +206,15 @@ public class UserResourceIntTest {
             .andExpect(status().isBadRequest());
 
         // Validate the User in the database
-        List<User> userList = userRepository.findAll();
-        assertThat(userList).hasSize(databaseSizeBeforeCreate);
+//        List<User> userList = userRepository.findAll();
+        assertThat(userRepository.findAll()).hasSize(databaseSizeBeforeCreate);
     }
 
     @Test
     public void createUserWithExistingLogin() throws Exception {
         // Initialize the database
         userRepository.save(user);
-        int databaseSizeBeforeCreate = userRepository.findAll().size();
+        int databaseSizeBeforeCreate = Lists.newArrayList(userRepository.findAll()).size();
 
         Set<String> authorities = new HashSet<>();
         authorities.add("ROLE_USER");
@@ -237,15 +241,16 @@ public class UserResourceIntTest {
             .andExpect(status().isBadRequest());
 
         // Validate the User in the database
-        List<User> userList = userRepository.findAll();
+        List<User> userList = Lists.newArrayList(userRepository.findAll());
         assertThat(userList).hasSize(databaseSizeBeforeCreate);
     }
 
     @Test
     public void createUserWithExistingEmail() throws Exception {
         // Initialize the database
+        user.setAuthorities(null);
         userRepository.save(user);
-        int databaseSizeBeforeCreate = userRepository.findAll().size();
+        int databaseSizeBeforeCreate = Lists.newArrayList(userRepository.findAll()).size();
 
         Set<String> authorities = new HashSet<>();
         authorities.add("ROLE_USER");
@@ -272,7 +277,7 @@ public class UserResourceIntTest {
             .andExpect(status().isBadRequest());
 
         // Validate the User in the database
-        List<User> userList = userRepository.findAll();
+        List<User> userList = Lists.newArrayList(userRepository.findAll());
         assertThat(userList).hasSize(databaseSizeBeforeCreate);
     }
 
@@ -321,7 +326,7 @@ public class UserResourceIntTest {
     public void updateUser() throws Exception {
         // Initialize the database
         userRepository.save(user);
-        int databaseSizeBeforeUpdate = userRepository.findAll().size();
+        int databaseSizeBeforeUpdate = Lists.newArrayList(userRepository.findAll()).size();
 
         // Update the user
         User updatedUser = userRepository.findOne(user.getId());
@@ -350,7 +355,7 @@ public class UserResourceIntTest {
             .andExpect(status().isOk());
 
         // Validate the User in the database
-        List<User> userList = userRepository.findAll();
+        List<User> userList = Lists.newArrayList(userRepository.findAll());
         assertThat(userList).hasSize(databaseSizeBeforeUpdate);
         User testUser = userList.get(userList.size() - 1);
         assertThat(testUser.getFirstName()).isEqualTo(UPDATED_FIRSTNAME);
@@ -364,7 +369,7 @@ public class UserResourceIntTest {
     public void updateUserLogin() throws Exception {
         // Initialize the database
         userRepository.save(user);
-        int databaseSizeBeforeUpdate = userRepository.findAll().size();
+        int databaseSizeBeforeUpdate = Lists.newArrayList(userRepository.findAll()).size();
 
         // Update the user
         User updatedUser = userRepository.findOne(user.getId());
@@ -393,7 +398,7 @@ public class UserResourceIntTest {
             .andExpect(status().isOk());
 
         // Validate the User in the database
-        List<User> userList = userRepository.findAll();
+        List<User> userList = Lists.newArrayList(userRepository.findAll());
         assertThat(userList).hasSize(databaseSizeBeforeUpdate);
         User testUser = userList.get(userList.size() - 1);
         assertThat(testUser.getLogin()).isEqualTo(UPDATED_LOGIN);
@@ -493,8 +498,8 @@ public class UserResourceIntTest {
     @Test
     public void deleteUser() throws Exception {
         // Initialize the database
-        userRepository.save(user);
-        int databaseSizeBeforeDelete = userRepository.findAll().size();
+        user = userRepository.save(user);
+        int databaseSizeBeforeDelete = Lists.newArrayList(userRepository.findAll()).size();
 
         // Delete the user
         restUserMockMvc.perform(delete("/api/users/{login}", user.getLogin())
@@ -502,7 +507,7 @@ public class UserResourceIntTest {
             .andExpect(status().isOk());
 
         // Validate the database is empty
-        List<User> userList = userRepository.findAll();
+        List<User> userList = Lists.newArrayList(userRepository.findAll());
         assertThat(userList).hasSize(databaseSizeBeforeDelete - 1);
     }
 
