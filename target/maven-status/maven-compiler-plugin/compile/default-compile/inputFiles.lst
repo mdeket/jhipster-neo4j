@@ -7,7 +7,6 @@
 /Users/milandeket/work/upwork/neojhipster/src/main/java/com/mycompany/myapp/repository/CustomAuditEventRepository.java
 /Users/milandeket/work/upwork/neojhipster/src/main/java/com/mycompany/myapp/service/UserService.java
 /Users/milandeket/work/upwork/neojhipster/src/main/java/com/mycompany/myapp/security/SpringSecurityAuditorAware.java
-/Users/milandeket/work/upwork/neojhipster/src/main/java/com/mycompany/myapp/domain/Movie.java
 /Users/milandeket/work/upwork/neojhipster/src/main/java/com/mycompany/myapp/config/audit/AuditEventConverter.java
 /Users/milandeket/work/upwork/neojhipster/src/main/java/com/mycompany/myapp/service/dto/package-info.java
 /Users/milandeket/work/upwork/neojhipster/src/main/java/com/mycompany/myapp/web/rest/errors/ErrorVM.java
@@ -67,7 +66,6 @@
 /Users/milandeket/work/upwork/neojhipster/src/main/java/com/mycompany/myapp/config/SecurityConfiguration.java
 /Users/milandeket/work/upwork/neojhipster/src/main/java/com/mycompany/myapp/aop/logging/LoggingAspect.java
 /Users/milandeket/work/upwork/neojhipster/src/main/java/com/mycompany/myapp/web/rest/errors/ParameterizedErrorVM.java
-/Users/milandeket/work/upwork/neojhipster/src/main/java/com/mycompany/myapp/repository/MovieRepository.java
 /Users/milandeket/work/upwork/neojhipster/src/main/java/com/mycompany/myapp/web/rest/package-info.java
 /Users/milandeket/work/upwork/neojhipster/src/main/java/com/mycompany/myapp/web/rest/errors/ErrorConstants.java
 /Users/milandeket/work/upwork/neojhipster/src/main/java/com/mycompany/myapp/config/dbmigrations/package-info.java

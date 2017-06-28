@@ -49,7 +49,6 @@ com/mycompany/myapp/web/rest/errors/FieldErrorVM.class
 com/mycompany/myapp/security/SpringSecurityAuditorAware.class
 com/mycompany/myapp/web/rest/vm/ManagedUserVM.class
 com/mycompany/myapp/web/rest/UserJWTController$JWTToken.class
-com/mycompany/myapp/domain/Movie.class
 com/mycompany/myapp/web/rest/errors/ParameterizedErrorVM.class
 com/mycompany/myapp/config/DateTimeFormatConfiguration.class
 com/mycompany/myapp/web/rest/vm/LoggerVM.class
@@ -59,7 +58,6 @@ com/mycompany/myapp/config/SecurityConfiguration.class
 com/mycompany/myapp/service/MailService.class
 com/mycompany/myapp/security/jwt/JWTConfigurer.class
 com/mycompany/myapp/domain/Authority.class
-com/mycompany/myapp/repository/MovieRepository.class
 com/mycompany/myapp/security/SecurityUtils.class
 com/mycompany/myapp/config/LoggingConfiguration.class
 com/mycompany/myapp/security/jwt/TokenProvider.class

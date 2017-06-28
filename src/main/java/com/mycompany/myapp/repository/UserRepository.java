@@ -24,7 +24,7 @@ public interface UserRepository extends GraphRepository<User> {
 //
 //    Optional<User> findOneByEmail(String email);
 //
-//    Optional<User> findOnezByLogin(String login);
+//    Optional<User> findOneByLogin(String login);
 
     User findOneByActivationKey(String activationKey);
     User findOneByLogin(String login);

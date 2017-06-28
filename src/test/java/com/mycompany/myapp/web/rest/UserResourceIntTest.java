@@ -4,6 +4,7 @@ import com.google.common.collect.Lists;
 import com.mycompany.myapp.NeojhipsterApp;
 import com.mycompany.myapp.domain.Authority;
 import com.mycompany.myapp.domain.User;
+import com.mycompany.myapp.repository.AuthorityRepository;
 import com.mycompany.myapp.repository.UserRepository;
 import com.mycompany.myapp.security.AuthoritiesConstants;
 import com.mycompany.myapp.service.MailService;
@@ -83,6 +84,9 @@ public class UserResourceIntTest {
     private MailService mailService;
 
     @Autowired
+    private AuthorityRepository authorityRepository;
+
+    @Autowired
     private UserService userService;
 
     @Autowired
@@ -135,6 +139,7 @@ public class UserResourceIntTest {
     public void initTest() {
         userRepository.deleteAll();
         user = createEntity();
+        authorityRepository.deleteAll();
     }
 
     @Test
@@ -142,8 +147,11 @@ public class UserResourceIntTest {
         int databaseSizeBeforeCreate = Lists.newArrayList(userRepository.findAll()).size();
 
         // Create the User
+        Authority authority = new Authority();
+        authority.setName("ROLE_USER");
+        authorityRepository.save(authority);
         Set<String> authorities = new HashSet<>();
-        authorities.add("ROLE_USER");
+        authorities.add(authority.getName());
         ManagedUserVM managedUserVM = new ManagedUserVM(
             null,
             DEFAULT_LOGIN,
@@ -206,7 +214,6 @@ public class UserResourceIntTest {
             .andExpect(status().isBadRequest());
 
         // Validate the User in the database
-//        List<User> userList = userRepository.findAll();
         assertThat(userRepository.findAll()).hasSize(databaseSizeBeforeCreate);
     }
 
@@ -331,8 +338,11 @@ public class UserResourceIntTest {
         // Update the user
         User updatedUser = userRepository.findOne(user.getId());
 
+        Authority authority = new Authority();
+        authority.setName("ROLE_USER");
+        authorityRepository.save(authority);
         Set<String> authorities = new HashSet<>();
-        authorities.add("ROLE_USER");
+        authorities.add(authority.getName());
         ManagedUserVM managedUserVM = new ManagedUserVM(
             updatedUser.getId(),
             updatedUser.getLogin(),
@@ -373,9 +383,11 @@ public class UserResourceIntTest {
 
         // Update the user
         User updatedUser = userRepository.findOne(user.getId());
-
+        Authority authority = new Authority();
+        authority.setName("ROLE_USER");
+        authorityRepository.save(authority);
         Set<String> authorities = new HashSet<>();
-        authorities.add("ROLE_USER");
+        authorities.add(authority.getName());
         ManagedUserVM managedUserVM = new ManagedUserVM(
             updatedUser.getId(),
             UPDATED_LOGIN,
@@ -513,6 +525,12 @@ public class UserResourceIntTest {
 
     @Test
     public void getAllAuthorities() throws Exception {
+        Authority userAuthority = new Authority();
+        userAuthority.setName("ROLE_USER");
+        Authority adminAuthority = new Authority();
+        adminAuthority.setName("ROLE_ADMIN");
+        authorityRepository.save(userAuthority);
+        authorityRepository.save(adminAuthority);
         restUserMockMvc.perform(get("/api/users/authorities")
             .accept(TestUtil.APPLICATION_JSON_UTF8)
             .contentType(TestUtil.APPLICATION_JSON_UTF8))

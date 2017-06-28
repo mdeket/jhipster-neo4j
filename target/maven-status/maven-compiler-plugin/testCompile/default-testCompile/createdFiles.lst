@@ -2,7 +2,6 @@ com/mycompany/myapp/config/WebConfigurerTest$MockServletRegistration.class
 com/mycompany/myapp/web/rest/errors/ExceptionTranslatorTestController.class
 com/mycompany/myapp/web/rest/LogsResourceIntTest.class
 com/mycompany/myapp/config/WebConfigurerTest.class
-com/mycompany/myapp/PersistenceContext.class
 com/mycompany/myapp/web/rest/errors/ExceptionTranslatorTestController$TestDTO.class
 com/mycompany/myapp/web/rest/TestUtil$ZonedDateTimeMatcher.class
 com/mycompany/myapp/web/rest/errors/ExceptionTranslatorIntTest.class
@@ -15,6 +14,7 @@ com/mycompany/myapp/security/jwt/JWTFilterTest.class
 com/mycompany/myapp/service/UserServiceIntTest.class
 com/mycompany/myapp/web/rest/ProfileInfoResourceIntTest.class
 com/mycompany/myapp/config/WebConfigurerTest$MockFilterRegistration.class
+com/mycompany/myapp/repository/CustomAuditEventRepositoryIntTest.class
 com/mycompany/myapp/web/rest/TestUtil.class
 com/mycompany/myapp/web/rest/UserJWTControllerIntTest.class
 com/mycompany/myapp/service/MailServiceIntTest.class

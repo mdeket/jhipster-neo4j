@@ -35,7 +35,7 @@ public class CustomAuditEventRepository implements AuditEventRepository {
     @Override
     public List<AuditEvent> find(Date after) {
         Iterable<PersistentAuditEvent> persistentAuditEvents =
-            persistenceAuditEventRepository.findByAuditEventDateAfter(after.toInstant());
+            persistenceAuditEventRepository.findByAuditEventDateAfter(after.getTime());
         return auditEventConverter.convertToAuditEvent(persistentAuditEvents);
     }
 
@@ -48,7 +48,7 @@ public class CustomAuditEventRepository implements AuditEventRepository {
             persistentAuditEvents = persistenceAuditEventRepository.findByPrincipal(principal);
         } else {
             persistentAuditEvents =
-                persistenceAuditEventRepository.findByPrincipalAndAuditEventDateAfter(principal, after.toInstant());
+                persistenceAuditEventRepository.findByPrincipalAndAuditEventDateAfter(principal, after.getTime());
         }
         return auditEventConverter.convertToAuditEvent(persistentAuditEvents);
     }
@@ -56,7 +56,7 @@ public class CustomAuditEventRepository implements AuditEventRepository {
     @Override
     public List<AuditEvent> find(String principal, Date after, String type) {
         Iterable<PersistentAuditEvent> persistentAuditEvents =
-            persistenceAuditEventRepository.findByPrincipalAndAuditEventDateAfterAndAuditEventType(principal, after.toInstant(), type);
+            persistenceAuditEventRepository.findByPrincipalAndAuditEventDateAfterAndAuditEventType(principal, after.getTime(), type);
         return auditEventConverter.convertToAuditEvent(persistentAuditEvents);
     }
 

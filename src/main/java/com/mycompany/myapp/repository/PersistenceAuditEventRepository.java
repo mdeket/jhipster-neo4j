@@ -17,11 +17,11 @@ public interface PersistenceAuditEventRepository extends GraphRepository<Persist
 
     List<PersistentAuditEvent> findByPrincipal(String principal);
 
-    List<PersistentAuditEvent> findByAuditEventDateAfter(Instant after);
+    List<PersistentAuditEvent> findByAuditEventDateAfter(Long after);
 
-    List<PersistentAuditEvent> findByPrincipalAndAuditEventDateAfter(String principal, Instant after);
+    List<PersistentAuditEvent> findByPrincipalAndAuditEventDateAfter(String principal, Long after);
 
-    List<PersistentAuditEvent> findByPrincipalAndAuditEventDateAfterAndAuditEventType(String principle, Instant after, String type);
+    List<PersistentAuditEvent> findByPrincipalAndAuditEventDateAfterAndAuditEventType(String principle, Long after, String type);
 
     Page<PersistentAuditEvent> findAllByAuditEventDateBetween(Instant fromDate, Instant toDate, Pageable pageable);
 }

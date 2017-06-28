@@ -1,9 +1,85 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <changelog xmlns="https://fbiville.github.io/liquigraph/schema/1.0/liquigraph.xsd">
-    <changeset id="hello-world" author="you">
-        <query>CREATE (n:Sentence {text:'Hello monde!'}) RETURN n</query>
+    <changeset id="01-addAuthorities" author="initiator">
+        <query>CREATE (n:Authority {name:'ROLE_USER'}) RETURN n</query>
+        <query>CREATE (n:Authority {name:'ROLE_ADMIN'}) RETURN n</query>
     </changeset>
-    <changeset id="hello-world-fixed" author="you">
-        <query>MATCH (n:Sentence {text:'Hello monde!'}) SET n.text='Hello world!' RETURN n</query>
+    <changeset id="02-addUsers" author="initiator">
+        <query>CREATE (n:User
+            {
+                id: 1,
+                login:'system',
+                password:'$2a$10$mE.qmcV0mFU5NcKh73TZx.z4ueI/.bDWbj0T1BYyqP481kGGarKLG',
+                firstName:'',
+                lastName:'System',
+                email:'system@localhost',
+                activated:true,
+                langKey:'en',
+                createdBy:'system'
+            }) RETURN n</query>
+        <query>CREATE (n:User
+            {
+            id: 2,
+            login:'anonymoususer',
+            password: '$2a$10$j8S5d7Sr7.8VTOYNviDPOeWX8KcYILUVJBsYV83Y5NtECayypx9lO',
+            firstName: 'Anonymous',
+            lastName: 'User',
+            email: 'anonymous@localhost',
+            activated: true,
+            langKey: 'en',
+            createdBy: 'system'
+            }) RETURN n</query>
+        <query>CREATE (n:User
+            {
+            id: 3,
+            login:'admin',
+            password:'$2a$10$gSAhZrxMllrbgj/kkK9UceBPpChGWJA7SYIb1Mqo.n5aNLq1/oRrC',
+            firstName:'admin',
+            lastName:'Administrator',
+            email:'admin@localhost',
+            activated:true,
+            langKey:'en',
+            createdBy:'system'
+            }) RETURN n</query>
+        <query>CREATE (n:User
+            {
+            id: 4,
+            login:'user',
+            password:'$2a$10$VEjxo0jq2YG9Rbk2HmX9S.k1uZBGYUHdUcid3g/vfiEl7lwWgOH/K',
+            firstName:'',
+            lastName:'User',
+            email:'user@localhost',
+            activated:true,
+            langKey:'en',
+            createdBy:'system'
+            }) RETURN n</query>
+    </changeset>
+    <changeset id="03-authorities-users" author="initiator">
+        <!-- System has ROLE_USER and ROLE_ADMIN -->
+        <query>MATCH (u:User),(a:Authority)
+            WHERE u.login = 'system' AND a.name = 'ROLE_USER'
+            CREATE (u)-[r:has]->(a)
+            RETURN r</query>
+        <query>MATCH (u:User),(a:Authority)
+            WHERE u.login = 'system' AND a.name = 'ROLE_ADMIN'
+            CREATE (u)-[r:has]->(a)
+            RETURN r</query>
+
+        <!-- Admin has ROLE_USER and ROLE_ADMIN -->
+        <query>MATCH (u:User),(a:Authority)
+            WHERE u.login = 'admin' AND a.name = 'ROLE_USER'
+            CREATE (u)-[r:has]->(a)
+            RETURN r</query>
+        <query>MATCH (u:User),(a:Authority)
+            WHERE u.login = 'admin' AND a.name = 'ROLE_ADMIN'
+            CREATE (u)-[r:has]->(a)
+            RETURN r</query>
+
+        <!-- User has ROLE_USER and ROLE_ADMIN -->
+        <query>MATCH (u:User),(a:Authority)
+            WHERE u.login = 'user' AND a.name = 'ROLE_USER'
+            CREATE (u)-[r:has]->(a)
+            RETURN r</query>
+
     </changeset>
 </changelog>
