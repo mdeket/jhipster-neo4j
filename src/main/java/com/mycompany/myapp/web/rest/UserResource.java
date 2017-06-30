@@ -15,6 +15,7 @@ import com.mycompany.myapp.web.rest.util.PaginationUtil;
 import io.github.jhipster.web.util.ResponseUtil;
 import io.swagger.annotations.ApiParam;
 
+import org.apache.commons.lang3.RandomStringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.data.domain.Page;
@@ -153,10 +154,21 @@ public class UserResource {
      */
     @GetMapping("/users")
     @Timed
-    public ResponseEntity<List<UserDTO>> getAllUsers(@ApiParam Pageable pageable) {
+    public ResponseEntity<List<?>> getAllUsers(@ApiParam Pageable pageable) {
         final Page<UserDTO> page = userService.getAllManagedUsers(pageable);
         HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(page, "/api/users");
         return new ResponseEntity(page.getContent(), headers, HttpStatus.OK);
+//        User user = new User();
+//        user.setLogin("milan");
+//        user.setPassword(RandomStringUtils.random(60));
+//        user.setActivated(true);
+//        user.setEmail("milan@gmail.com");
+//        user.setFirstName("milan");
+//        user.setLastName("deket");
+//        user.setImageUrl("");
+//        user.setLangKey("en");
+//        userRepository.save(user);
+//        return new ResponseEntity(userRepository.findAll(), HttpStatus.OK);
     }
 
     /**

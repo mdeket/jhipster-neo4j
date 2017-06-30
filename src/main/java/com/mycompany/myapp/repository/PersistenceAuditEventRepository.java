@@ -23,5 +23,5 @@ public interface PersistenceAuditEventRepository extends GraphRepository<Persist
 
     List<PersistentAuditEvent> findByPrincipalAndAuditEventDateAfterAndAuditEventType(String principle, Long after, String type);
 
-    Page<PersistentAuditEvent> findAllByAuditEventDateBetween(Instant fromDate, Instant toDate, Pageable pageable);
+    Page<PersistentAuditEvent> findAllByAuditEventDateBetween(Long fromDate, Long toDate, Pageable pageable);
 }

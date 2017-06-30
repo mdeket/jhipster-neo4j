@@ -137,9 +137,8 @@ public class UserResourceIntTest {
 
     @Before
     public void initTest() {
-        userRepository.deleteAll();
+//        userRepository.deleteAll();
         user = createEntity();
-        authorityRepository.deleteAll();
     }
 
     @Test
@@ -149,9 +148,9 @@ public class UserResourceIntTest {
         // Create the User
         Authority authority = new Authority();
         authority.setName("ROLE_USER");
-        authorityRepository.save(authority);
+//        authorityRepository.save(authority);
         Set<String> authorities = new HashSet<>();
-        authorities.add(authority.getName());
+        authorities.add("ROLE_USER");
         ManagedUserVM managedUserVM = new ManagedUserVM(
             null,
             DEFAULT_LOGIN,

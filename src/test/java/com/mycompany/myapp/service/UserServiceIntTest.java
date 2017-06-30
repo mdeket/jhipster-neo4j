@@ -114,7 +114,7 @@ public class UserServiceIntTest {
     public void testFindNotActivatedUsersByCreationDateBefore() {
         userService.removeNotActivatedUsers();
         Instant now = Instant.now();
-        List<User> users = userRepository.findAllByActivatedIsFalseAndCreatedDateBefore(now.minus(3, ChronoUnit.DAYS));
+        List<User> users = userRepository.findAllByActivatedIsFalseAndCreatedDateLessThan(now.minus(3, ChronoUnit.DAYS).toEpochMilli());
         assertThat(users).isEmpty();
     }
 

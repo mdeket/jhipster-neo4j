@@ -7,15 +7,15 @@
     <changeset id="02-addUsers" author="initiator">
         <query>CREATE (n:jhi_user
             {
-                id: 1,
-                login:'system',
-                password:'$2a$10$mE.qmcV0mFU5NcKh73TZx.z4ueI/.bDWbj0T1BYyqP481kGGarKLG',
-                firstName:'',
-                lastName:'System',
-                email:'system@localhost',
-                activated:true,
-                langKey:'en',
-                createdBy:'system'
+            id: 1,
+            login:'system',
+            password:'$2a$10$mE.qmcV0mFU5NcKh73TZx.z4ueI/.bDWbj0T1BYyqP481kGGarKLG',
+            firstName:'',
+            lastName:'System',
+            email:'system@localhost',
+            activated:true,
+            langKey:'en',
+            createdBy:'system'
             }) RETURN n</query>
         <query>CREATE (n:jhi_user
             {

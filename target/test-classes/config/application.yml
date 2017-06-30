@@ -26,6 +26,11 @@ spring:
 #            uri: http://localhost:7474
 #            username: neo4j
 #            password: root
+    datasource:
+        driver-class-name: org.neo4j.jdbc.http.HttpDriver
+        url: jdbc:neo4j:http://localhost
+        username: neo4j
+        password: root
     mail:
         host: localhost
     messages:

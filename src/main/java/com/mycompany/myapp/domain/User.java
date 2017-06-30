@@ -73,7 +73,7 @@ public class User extends AbstractAuditingEntity {
     private String resetKey;
 
 
-    private Long resetDate = null;
+    private Long resetDate;
 
     @JsonIgnore
     @Relationship(type = "AUTHORITIES", direction = Relationship.INCOMING)
@@ -161,11 +161,18 @@ public class User extends AbstractAuditingEntity {
     }
 
     public Instant getResetDate() {
-       return Instant.ofEpochMilli(resetDate);
+        if(this.resetDate != null){
+            return Instant.ofEpochMilli(this.resetDate);
+        }
+        return null;
     }
 
     public void setResetDate(Instant resetDate) {
-        this.resetDate = resetDate.toEpochMilli();
+        if(resetDate != null) {
+            this.resetDate = resetDate.toEpochMilli();
+        } else {
+            this.resetDate = null;
+        }
     }
     public String getLangKey() {
         return langKey;

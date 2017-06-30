@@ -6,6 +6,9 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.neo4j.annotation.Query;
 import org.springframework.data.neo4j.repository.GraphRepository;
 import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Propagation;
+import org.springframework.transaction.annotation.Transactional;
+
 import java.util.List;
 import java.util.Optional;
 import java.time.Instant;
@@ -14,11 +17,12 @@ import java.time.Instant;
  * Spring Data Neo4j repository for the User entity.
  */
 @Repository
+@Transactional
 public interface UserRepository extends GraphRepository<User> {
 
 //    Optional<User> findOneByActivationKey(String activationKey);
 
-    List<User> findAllByActivatedIsFalseAndCreatedDateBefore(Instant dateTime);
+    List<User> findAllByActivatedIsFalseAndCreatedDateLessThan(Long dateTime);
 
 //    Optional<User> findOneByResetKey(String resetKey);
 //
@@ -31,5 +35,6 @@ public interface UserRepository extends GraphRepository<User> {
     User findOneByEmail(String email);
     User findOneByResetKey(String resetKey);
 
+    @Query("match (u:jhi_user) where u.login <> 'anonymoususer' return u")
     Page<User> findAllByLoginNot(Pageable pageable, String login);
 }

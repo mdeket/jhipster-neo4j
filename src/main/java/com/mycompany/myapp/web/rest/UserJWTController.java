@@ -44,7 +44,7 @@ public class UserJWTController {
 
     @PostMapping("/authenticate")
     @Timed
-    @Transactional(propagation = Propagation.REQUIRED)
+    @Transactional//(propagation = Propagation.REQUIRED)
     public ResponseEntity authorize(@Valid @RequestBody LoginVM loginVM, HttpServletResponse response) {
 
         UsernamePasswordAuthenticationToken authenticationToken =
