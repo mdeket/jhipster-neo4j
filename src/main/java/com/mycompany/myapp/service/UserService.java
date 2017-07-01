@@ -13,6 +13,7 @@ import com.mycompany.myapp.service.dto.UserDTO;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.Pageable;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -203,7 +204,7 @@ public class UserService {
     }
 
     public Page<UserDTO> getAllManagedUsers(Pageable pageable) {
-        return userRepository.findAllByLoginNot(pageable, Constants.ANONYMOUS_USER).map(UserDTO::new);
+        return this.findAllByLoginNot(pageable, Constants.ANONYMOUS_USER).map(UserDTO::new);
     }
 
     public Optional<User> getUserWithAuthoritiesByLogin(String login) {
@@ -243,5 +244,12 @@ public class UserService {
             list.add(authority);
         });
         return list.stream().map(Authority::getName).collect(Collectors.toList());
+    }
+
+    public Page<User> findAllByLoginNot(Pageable pageable, String login) {
+
+        List<User> users = userRepository.findAllByLoginNot((pageable.getPageNumber() - 1) * pageable.getPageSize(), pageable.getPageSize(), login);
+        Page<User> page = new PageImpl(users, pageable, userRepository.count());
+        return page;
     }
 }

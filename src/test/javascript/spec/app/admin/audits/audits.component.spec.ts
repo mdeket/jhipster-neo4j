@@ -2,7 +2,7 @@ import { ComponentFixture, TestBed, async } from '@angular/core/testing';
 import { DatePipe } from '@angular/common';
 import { NgbPaginationConfig} from '@ng-bootstrap/ng-bootstrap';
 import { JhiParseLinks } from 'ng-jhipster';
-import { NeojhipsterTestModule } from '../../../test.module';
+import { Neo4JhipsterTestModule } from '../../../test.module';
 import { PaginationConfig } from '../../../../../../main/webapp/app/blocks/config/uib-pagination.config'
 import { AuditsComponent } from '../../../../../../main/webapp/app/admin/audits/audits.component';
 import { AuditsService } from '../../../../../../main/webapp/app/admin/audits/audits.service';
@@ -35,7 +35,7 @@ describe('Component Tests', () => {
 
         beforeEach(async(() => {
             TestBed.configureTestingModule({
-                imports: [NeojhipsterTestModule],
+                imports: [Neo4JhipsterTestModule],
                 declarations: [AuditsComponent],
                 providers: [
                     AuditsService,

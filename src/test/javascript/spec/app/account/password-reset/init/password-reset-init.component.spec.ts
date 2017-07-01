@@ -1,7 +1,7 @@
 import { ComponentFixture, TestBed, inject } from '@angular/core/testing';
 import { Renderer, ElementRef } from '@angular/core';
 import { Observable } from 'rxjs/Rx';
-import { NeojhipsterTestModule } from '../../../../test.module';
+import { Neo4JhipsterTestModule } from '../../../../test.module';
 import { PasswordResetInitComponent } from '../../../../../../../main/webapp/app/account/password-reset/init/password-reset-init.component';
 import { PasswordResetInitService } from '../../../../../../../main/webapp/app/account/password-reset/init/password-reset-init.service';
 
@@ -14,7 +14,7 @@ describe('Component Tests', () => {
 
         beforeEach(() => {
             fixture = TestBed.configureTestingModule({
-                imports: [NeojhipsterTestModule],
+                imports: [Neo4JhipsterTestModule],
                 declarations: [PasswordResetInitComponent],
                 providers: [
                     PasswordResetInitService,

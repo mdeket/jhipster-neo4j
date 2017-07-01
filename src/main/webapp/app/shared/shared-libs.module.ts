@@ -13,8 +13,6 @@ import { CookieModule } from 'ngx-cookie';
         NgJhipsterModule.forRoot({
             // set below to true to make alerts look like toast
             alertAsToast: false,
-            i18nEnabled: true,
-            defaultI18nLang: 'en'
         }),
         InfiniteScrollModule,
         CookieModule.forRoot()
@@ -28,4 +26,4 @@ import { CookieModule } from 'ngx-cookie';
         InfiniteScrollModule
     ]
 })
-export class NeojhipsterSharedLibsModule {}
+export class Neo4JhipsterSharedLibsModule {}

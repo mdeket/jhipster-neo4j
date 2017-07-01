@@ -5,7 +5,6 @@ const HtmlWebpackPlugin = require('html-webpack-plugin');
 const StringReplacePlugin = require('string-replace-webpack-plugin');
 const AddAssetHtmlPlugin = require('add-asset-html-webpack-plugin');
 const WebpackNotifierPlugin = require('webpack-notifier');
-const MergeJsonWebpackPlugin = require("merge-jsons-webpack-plugin")
 const path = require('path');
 
 const parseVersion = require('./utils.js').parseVersion;
@@ -18,7 +17,7 @@ module.exports = (options) => {
     return {
         entry: {
             'polyfills': './src/main/webapp/app/polyfills',
-            'global': './src/main/webapp/content/scss/global.scss',
+            'global': './src/main/webapp/content/css/global.css',
             'main': './src/main/webapp/app/app.main'
         },
         resolve: {
@@ -47,15 +46,6 @@ module.exports = (options) => {
                         minifyCSS:false
                     },
                     exclude: ['./src/main/webapp/index.html']
-                },
-                {
-                    test: /\.scss$/,
-                    loaders: ['to-string-loader', 'css-loader', 'sass-loader'],
-                    exclude: /(vendor\.scss|global\.scss)/
-                },
-                {
-                    test: /(vendor\.scss|global\.scss)/,
-                    loaders: ['style-loader', 'css-loader', 'postcss-loader', 'sass-loader']
                 },
                 {
                     test: /\.css$/,
@@ -105,14 +95,6 @@ module.exports = (options) => {
             new webpack.ProvidePlugin({
                 $: "jquery",
                 jQuery: "jquery"
-            }),
-            new MergeJsonWebpackPlugin({
-                output: {
-                    groupBy: [
-                        { pattern: "./src/main/webapp/i18n/en/*.json", fileName: "./target/www/i18n/en.json" }
-                        // jhipster-needle-i18n-language-webpack - JHipster will add/remove languages in this array
-                    ]
-                }
             }),
             new HtmlWebpackPlugin({
                 template: './src/main/webapp/index.html',

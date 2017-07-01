@@ -8,7 +8,7 @@ import { Account, LoginModalService, Principal } from '../shared';
     selector: 'jhi-home',
     templateUrl: './home.component.html',
     styleUrls: [
-        'home.scss'
+        'home.css'
     ]
 
 })

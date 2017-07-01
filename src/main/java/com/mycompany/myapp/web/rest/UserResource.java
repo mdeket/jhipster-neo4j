@@ -158,17 +158,6 @@ public class UserResource {
         final Page<UserDTO> page = userService.getAllManagedUsers(pageable);
         HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(page, "/api/users");
         return new ResponseEntity(page.getContent(), headers, HttpStatus.OK);
-//        User user = new User();
-//        user.setLogin("milan");
-//        user.setPassword(RandomStringUtils.random(60));
-//        user.setActivated(true);
-//        user.setEmail("milan@gmail.com");
-//        user.setFirstName("milan");
-//        user.setLastName("deket");
-//        user.setImageUrl("");
-//        user.setLangKey("en");
-//        userRepository.save(user);
-//        return new ResponseEntity(userRepository.findAll(), HttpStatus.OK);
     }
 
     /**

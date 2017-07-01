@@ -1,5 +1,5 @@
-var dataCacheName = '"Neojhipster-v1';
-var cacheName = '"Neojhipster-1';
+var dataCacheName = '"Neo4Jhipster-v1';
+var cacheName = '"Neo4Jhipster-1';
 var filesToCache = [
     '/',
     '/index.html'

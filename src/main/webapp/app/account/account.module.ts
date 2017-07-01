@@ -1,7 +1,7 @@
 import { NgModule, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { RouterModule } from '@angular/router';
 
-import { NeojhipsterSharedModule } from '../shared';
+import { Neo4JhipsterSharedModule } from '../shared';
 
 import {
     Register,
@@ -21,7 +21,7 @@ import {
 
 @NgModule({
     imports: [
-        NeojhipsterSharedModule,
+        Neo4JhipsterSharedModule,
         RouterModule.forRoot(accountState, { useHash: true })
     ],
     declarations: [
@@ -42,4 +42,4 @@ import {
     ],
     schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })
-export class NeojhipsterAccountModule {}
+export class Neo4JhipsterAccountModule {}

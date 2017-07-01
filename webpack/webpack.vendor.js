@@ -30,8 +30,8 @@ module.exports = {
         exprContextCritical: false,
         rules: [
             {
-                test: /(vendor\.scss|global\.scss)/,
-                loaders: ['style-loader', 'css-loader', 'postcss-loader', 'sass-loader']
+                test: /(vendor\.css|global\.css)/,
+                loaders: ['style-loader', 'css-loader']
             },
             {
                 test: /\.(jpe?g|png|gif|svg|woff2?|ttf|eot)$/i,

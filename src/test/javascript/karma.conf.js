@@ -22,7 +22,7 @@ module.exports = function (config) {
 
 
         // list of files to exclude
-        exclude: ['e2e/**'],
+        exclude: [],
 
         // preprocess matching files before serving them to the browser
         // available preprocessors: https://npmjs.org/browse/keyword/karma-preprocessor
@@ -52,10 +52,6 @@ module.exports = function (config) {
                     {
                         test: /\.async\.(html|css)$/,
                         loaders: ['file?name=[name].[hash].[ext]', 'extract']
-                    },
-                    {
-                        test: /\.scss$/,
-                        loaders: ['to-string-loader', 'css-loader', 'sass-loader']
                     },
                     {
                         test: /\.(jpe?g|png|gif|svg|woff2?|ttf|eot)$/i,

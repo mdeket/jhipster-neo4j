@@ -1,6 +1,6 @@
 {
-  "name": "Neojhipster",
-  "short_name": "Neojhipster",
+  "name": "Neo4Jhipster",
+  "short_name": "Neo4Jhipster",
   "icons": [
       {
           "src": "./content/images/logo-jhipster.png",

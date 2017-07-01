@@ -2,31 +2,26 @@ import { NgModule } from '@angular/core';
 import { Title } from '@angular/platform-browser';
 
 import {
-    NeojhipsterSharedLibsModule,
-    JhiLanguageHelper,
-    FindLanguageFromKeyPipe,
+    Neo4JhipsterSharedLibsModule,
     JhiAlertComponent,
     JhiAlertErrorComponent
 } from './';
 
 @NgModule({
     imports: [
-        NeojhipsterSharedLibsModule
+        Neo4JhipsterSharedLibsModule
     ],
     declarations: [
-        FindLanguageFromKeyPipe,
         JhiAlertComponent,
         JhiAlertErrorComponent
     ],
     providers: [
-        JhiLanguageHelper,
         Title
     ],
     exports: [
-        NeojhipsterSharedLibsModule,
-        FindLanguageFromKeyPipe,
+        Neo4JhipsterSharedLibsModule,
         JhiAlertComponent,
         JhiAlertErrorComponent
     ]
 })
-export class NeojhipsterSharedCommonModule {}
+export class Neo4JhipsterSharedCommonModule {}

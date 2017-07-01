@@ -1,6 +1,6 @@
 import { ComponentFixture, TestBed, async } from '@angular/core/testing';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
-import { NeojhipsterTestModule } from '../../../test.module';
+import { Neo4JhipsterTestModule } from '../../../test.module';
 import { JhiHealthCheckComponent } from '../../../../../../main/webapp/app/admin/health/health.component';
 import { JhiHealthService } from '../../../../../../main/webapp/app/admin/health/health.service';
 
@@ -15,7 +15,7 @@ describe('Component Tests', () => {
 
         beforeEach(async(() => {
             TestBed.configureTestingModule({
-                imports: [NeojhipsterTestModule],
+                imports: [Neo4JhipsterTestModule],
                 declarations: [JhiHealthCheckComponent],
                 providers: [
                     JhiHealthService,
