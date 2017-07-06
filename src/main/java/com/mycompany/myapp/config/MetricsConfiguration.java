@@ -1,5 +1,6 @@
 package com.mycompany.myapp.config;
 
+import com.codahale.metrics.health.HealthCheck;
 import io.github.jhipster.config.JHipsterProperties;
 
 import com.codahale.metrics.JmxReporter;
