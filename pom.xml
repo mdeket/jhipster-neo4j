@@ -85,9 +85,6 @@
         <yarn.version>v0.24.6</yarn.version>
         <sdn.version>4.2.4.RELEASE</sdn.version>
         <neo4j.version>2.1.2</neo4j.version>
-        <!--<neo4j-ogm.version>2.0.6</neo4j-ogm.version>-->
-
-        <neo4j-ogm.version>2.1.2</neo4j-ogm.version>
     </properties>
 
 
@@ -143,11 +140,6 @@
             <artifactId>jackson-module-afterburner</artifactId>
             <version>2.8.8</version>
         </dependency>
-        <!--<dependency>-->
-            <!--<groupId>com.h2database</groupId>-->
-            <!--<artifactId>h2</artifactId>-->
-            <!--<scope>test</scope>-->
-        <!--</dependency>-->
         <dependency>
             <groupId>org.awaitility</groupId>
             <artifactId>awaitility</artifactId>
@@ -240,21 +232,21 @@
             <artifactId>spring-data-neo4j</artifactId>
             <version>${sdn.version}</version>
         </dependency>
-        <dependency>
-            <groupId>org.neo4j</groupId>
-            <artifactId>neo4j-ogm-core</artifactId>
-            <version>${neo4j-ogm.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>org.neo4j</groupId>
-            <artifactId>neo4j-ogm-api</artifactId>
-            <version>${neo4j-ogm.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>org.neo4j</groupId>
-            <artifactId>neo4j-cypher</artifactId>
-            <version>${neo4j.version}</version>
-        </dependency>
+        <!--<dependency>-->
+            <!--<groupId>org.neo4j</groupId>-->
+            <!--<artifactId>neo4j-ogm-core</artifactId>-->
+            <!--<version>${neo4j.version}</version>-->
+        <!--</dependency>-->
+        <!--<dependency>-->
+            <!--<groupId>org.neo4j</groupId>-->
+            <!--<artifactId>neo4j-ogm-api</artifactId>-->
+            <!--<version>${neo4j.version}</version>-->
+        <!--</dependency>-->
+        <!--<dependency>-->
+            <!--<groupId>org.neo4j</groupId>-->
+            <!--<artifactId>neo4j-cypher</artifactId>-->
+            <!--<version>${neo4j.version}</version>-->
+        <!--</dependency>-->
 
         <!-- test scoped beans only -->
         <dependency>
@@ -274,13 +266,13 @@
         <dependency>
             <groupId>org.neo4j</groupId>
             <artifactId>neo4j-ogm-embedded-driver</artifactId>
-            <version>${neo4j-ogm.version}</version>
+            <version>${neo4j.version}</version>
             <scope>test</scope>
         </dependency>
         <dependency>
             <groupId>org.neo4j</groupId>
             <artifactId>neo4j-ogm-test</artifactId>
-            <version>${neo4j-ogm.version}</version>
+            <version>${neo4j.version}</version>
             <scope>test</scope>
         </dependency>
         <dependency>
