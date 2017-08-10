@@ -1,6 +1,16 @@
 # neojhipster
 This application was generated using JHipster 4.5.4, you can find documentation and help at [https://jhipster.github.io/documentation-archive/v4.5.4](https://jhipster.github.io/documentation-archive/v4.5.4).
 
+This project is built using:
+
+- Spring Boot 1.5.3
+- Spring Data Neo4j 4.2.4
+- Neo4j OGM 2.1.2
+- Neo4J v2.1.2
+
+The generated app is modified to use Neo4j database instead of MongoDB.
+All dependencies which MongoDB was using are removed from the project and replaced with Neo4J supported ones. (Repositories, migrations, etc.)
+
 ## Development
 
 Before you can build this project, you must install and configure the following dependencies on your machine:
@@ -103,6 +113,7 @@ and can be run by starting Spring Boot in one terminal (`./mvnw spring-boot:run`
 For more information, refer to the [Running tests page][].
 
 ## Using Docker to simplify development (optional)
+### Docker in not supported yet.
 
 You can use Docker to improve your JHipster development experience. A number of docker-compose configuration are available in the [src/main/docker](src/main/docker) folder to launch required third party services.
 For example, to start a mongodb database in a docker container, run:
