@@ -5,17 +5,12 @@ import com.mycompany.myapp.config.Constants;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.hibernate.validator.constraints.Email;
 import org.neo4j.ogm.annotation.GraphId;
+import org.neo4j.ogm.annotation.Index;
 import org.neo4j.ogm.annotation.NodeEntity;
 import org.neo4j.ogm.annotation.Relationship;
-import org.springframework.data.annotation.Id;
-//import org.springframework.data.mongodb.core.index.Indexed;
-//import org.springframework.data.mongodb.core.mapping.Document;
-//import org.springframework.data.mongodb.core.mapping.Field;
-
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
-import java.io.Serializable;
 import java.util.HashSet;
 import java.util.Locale;
 import java.util.Set;
@@ -25,7 +20,6 @@ import java.time.Instant;
  * A user.
  */
 @NodeEntity(label = "jhi_user")
-//@Document(collection = "jhi_user")
 public class User extends AbstractAuditingEntity {
 
     @GraphId
@@ -36,7 +30,7 @@ public class User extends AbstractAuditingEntity {
     @NotNull
     @Pattern(regexp = Constants.LOGIN_REGEX)
     @Size(min = 1, max = 50)
-    // TODO: add index
+    @Index
     private String login;
 
     @JsonIgnore
@@ -52,8 +46,7 @@ public class User extends AbstractAuditingEntity {
 
     @Email
     @Size(min = 5, max = 100)
-    // TODO:
-//    @Index
+    @Index
     private String email;
 
     private boolean activated = false;

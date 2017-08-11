@@ -3,7 +3,6 @@ package com.mycompany.myapp.domain;
 import java.io.Serializable;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import org.neo4j.ogm.annotation.GraphId;
 import org.neo4j.ogm.annotation.Property;
 import org.springframework.data.annotation.CreatedBy;
 import org.springframework.data.annotation.CreatedDate;

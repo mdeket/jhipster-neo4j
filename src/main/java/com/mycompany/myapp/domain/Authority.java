@@ -1,13 +1,9 @@
 package com.mycompany.myapp.domain;
 
-
-import org.neo4j.ogm.annotation.GraphId;
 import org.neo4j.ogm.annotation.NodeEntity;
 import org.neo4j.ogm.annotation.Relationship;
-import org.springframework.data.annotation.Id;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
-import java.io.Serializable;
 
 /**
  * An authority (a security role) used by Spring Security.
