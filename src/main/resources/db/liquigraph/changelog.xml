@@ -58,27 +58,27 @@
         <!-- System has ROLE_USER and ROLE_ADMIN -->
         <query>MATCH (u:jhi_user),(a:jhi_authority)
             WHERE u.login = 'system' AND a.name = 'ROLE_USER'
-            CREATE (u)-[r:has]->(a)
+            CREATE (u)-[r:HAS_ROLE]->(a)
             RETURN r</query>
         <query>MATCH (u:User),(a:jhi_authority)
             WHERE u.login = 'system' AND a.name = 'ROLE_ADMIN'
-            CREATE (u)-[r:has]->(a)
+            CREATE (u)-[r:HAS_ROLE]->(a)
             RETURN r</query>
 
         <!-- Admin has ROLE_USER and ROLE_ADMIN -->
         <query>MATCH (u:jhi_user),(a:jhi_authority)
             WHERE u.login = 'admin' AND a.name = 'ROLE_USER'
-            CREATE (u)-[r:has]->(a)
+            CREATE (u)-[r:HAS_ROLE]->(a)
             RETURN r</query>
         <query>MATCH (u:jhi_user),(a:jhi_authority)
             WHERE u.login = 'admin' AND a.name = 'ROLE_ADMIN'
-            CREATE (u)-[r:has]->(a)
+            CREATE (u)-[r:HAS_ROLE]->(a)
             RETURN r</query>
 
         <!-- User has ROLE_USER and ROLE_ADMIN -->
         <query>MATCH (u:jhi_user),(a:jhi_authority)
             WHERE u.login = 'user' AND a.name = 'ROLE_USER'
-            CREATE (u)-[r:has]->(a)
+            CREATE (u)-[r:HAS_ROLE]->(a)
             RETURN r</query>
 
     </changeset>

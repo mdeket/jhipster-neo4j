@@ -69,7 +69,6 @@ public class User extends AbstractAuditingEntity {
     private Long resetDate;
 
     @JsonIgnore
-    @Relationship(type = "AUTHORITIES", direction = Relationship.INCOMING)
     private Set<Authority> authorities = new HashSet<>();
 
     public Long getId() {
